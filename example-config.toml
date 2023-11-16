@@ -1,0 +1,14 @@
+[credentials]
+
+default = 'gas'
+
+[credentials.gas]  # credentials for this username
+library_id = 1234567  # UserID
+library_type = 'user'  # This is a user library
+api_key = 'qeikjlkjlTaaaaaaaaaaaaaa'  # Obtained from zotero.org/settings/keys
+
+[credentials.gabian]  # credentials for this group
+library_id = 7654321  # GroupID (look at the URL when accessing zotero.org's group)
+library_type = 'group'  # This is a user library
+api_key = 'xxxxxxxxxxxxxxxxxxxxxxxx'  # Obtained from zotero.org/settings/keys
+
