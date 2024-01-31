@@ -19,14 +19,14 @@ def filter_entries(items):
 				# Is there a better way to do that?
 
 
-def get_all_items(zotapi: ZoteroAPI) -> bibtexparser.bibdatabase.BibDatabase:
-	items = zotapi.items(format='biblatex')
+def get_all_items(zotapi: ZoteroAPI, format: str) -> bibtexparser.bibdatabase.BibDatabase:
+	items = zotapi.items(format=format)
 	filter_entries(items)
 	return items
 
 
-def get_collection_items(zotapi: ZoteroAPI, collection_id: str) -> bibtexparser.bibdatabase.BibDatabase:
-	items = zotapi.collection_items(collection_id, format='biblatex')
+def get_collection_items(zotapi: ZoteroAPI, collection_id: str, format: str) -> bibtexparser.bibdatabase.BibDatabase:
+	items = zotapi.collection_items(collection_id, format=format)
 	filter_entries(items)
 	return items
 
@@ -36,6 +36,7 @@ def main():
 	parser.add_argument("--credentials-name", default=None)
 	parser.add_argument("--collection-id", default=None)
 	parser.add_argument("-c", "--config", default=os.getenv('ZOBIB_CONFIG'))
+	parser.add_argument("-f", "--format", default="biblatex", choices=("biblatex", "bibtex"))
 	args = parser.parse_args()
 
 	if args.config is None:
@@ -50,9 +51,9 @@ def main():
 	zotapi = get_zotero_api(cred)
 
 	if args.collection_id:
-		bibdb = get_collection_items(zotapi, args.collection_id)
+		bibdb = get_collection_items(zotapi, args.collection_id, format=args.format)
 	else:
-		bibdb = get_all_items(zotapi)
+		bibdb = get_all_items(zotapi, format=args.format)
 
 	bibitems = bibtexparser.dumps(bibdb)
 	print(bibitems)
