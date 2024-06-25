@@ -26,7 +26,7 @@ def get_all_items(zotapi: ZoteroAPI, format: str) -> bibtexparser.bibdatabase.Bi
 
 
 def get_collection_items(zotapi: ZoteroAPI, collection_id: str, format: str) -> bibtexparser.bibdatabase.BibDatabase:
-	items = zotapi.collection_items(collection_id, format=format)
+	items = zotapi.everything(zotapi.collection_items(collection_id, format=format))
 	filter_entries(items)
 	return items
 
