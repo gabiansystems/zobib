@@ -20,7 +20,7 @@ def filter_entries(items):
 
 
 def get_all_items(zotapi: ZoteroAPI, format: str) -> bibtexparser.bibdatabase.BibDatabase:
-	items = zotapi.items(format=format)
+	items = zotapi.everything(zotapi.items(format=format))
 	filter_entries(items)
 	return items
 
