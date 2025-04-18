@@ -12,6 +12,7 @@ exclusions = {'abstract', 'keywords', 'doi', 'issn', 'isbn', 'langid', 'note', '
 
 
 def filter_entries(items):
+	if not items: return
 	for entry in items.entries:
 		for excluded in exclusions:
 			if excluded in entry:
